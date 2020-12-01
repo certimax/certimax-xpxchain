@@ -46,15 +46,12 @@ void main() async {
 
   app.get('/connectWallet/<privKey>', (Request request, String privKey) async {
     final utils = new SigninUtils();
-    List<Object> walletData = await utils.createAccount(privKey);
+    List<Object> walletData = await utils.createAccountFromPrivateKeyAkaLogin(privKey);
     final data = {
       'Address': '${walletData[0]}',
       'PublicKey': '${walletData[1]}',
       'PrivateKey': '${walletData[2]}',
     };
-    /*final data = {
-      'data' : '${walletData}',
-    };*/
     return Response.ok(
       json.encode(data),
       headers: {
